@@ -1,4 +1,3 @@
-// @Author: Rahul Kherajani
 module.exports = (sequelize, DataTypes) => {
   const City = sequelize.define(
     'city',
