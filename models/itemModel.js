@@ -14,16 +14,19 @@ module.exports = (sequelize, DataTypes) => {
       item_description: {
         type: DataTypes.STRING(1000),
       },
-      
-      product_quantity: {
+
+      item_quantity: {
         type: DataTypes.INTEGER,
       },
-      product_isactive: {
-        type: DataTypes.BOOLEAN,
+
+      item_status: {
+        type: DataTypes.STRING,
       },
     },
     {
       timestamps: true,
+      createdAt: 'created_at',
+      updatedAt: 'updated_at',
     }
   );
 

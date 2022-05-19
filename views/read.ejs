@@ -9,15 +9,21 @@
   </head>
   <body>
     <div class="container" style="margin:2em auto">
-    <h1>Shopify Backend Developer Intern Challenge</h1>
+    <h1>Shopify Production Engineer Intern Challenge</h1>
     <p class = "lead"> Made with <i class="bi bi-heart-fill"></i> by Rahul Kherajani</p>
-    <p class = "lead"> Source Code: <a href = "https://github.com/RahulKherajani/shopify-back-end-challenge"><i class="bi bi-github"></i></a></p>
+    <p class = "lead"> Source Code: <a href = "https://github.com/RahulKherajani/shopify-production-challenge"><i class="bi bi-github"></i></a></p>
     <p class = "lead">Requirements:</p>
     <ul><li>
-      Basic CRUD Functionality for Items
+      Basic CRUD Functionality for items.
     </li>
     <li>
-     When deleting, allow deletion comments and undeletion
+      Each Inventory Item associated with a city (5 possible cities).
+    </li>
+    <li>
+      List of items includes the city & a description of current weather in the city.
+    </li>
+    <li>
+     When deleting an item, allow deletion comments and undeletion.
     </li></ul>
     <hr/>
     <h2>Inventory Management</h2>
@@ -31,24 +37,30 @@
           <th>Name</th>
           <th>Description</th>
           <th>Quantity</th>
+          <th>City</th>
+          <th>Weather</th>
           <th>Status</th>
           <th>Actions</th>
         </tr>
         <% items.forEach((item) => {%>
             <tr>  
-              <td><%= item.id %></td>
-              <td><%= item.name %></td>
-              <td><%= item.description %></td>
-              <td><%= item.quantity %></td>
-              <td><%= item.status %></td>
-              <% if(item.status==='active'){ %>
-              <td><a class="btn btn-warning" href="/edit/<%= item.id%>">Edit</a>
-              <a class="btn btn-danger" href="/delete/<%= item.id%>">Delete</a></td>
-              <% } else{ %>  
-              <td><form action='/undo/<%= item.id %>' method="POST">
+              <td><%= item.item_id %></td>
+              <td><%= item.item_name %></td>
+              <td><%= item.item_description %></td>
+              <td><%= item.item_quantity %></td>
+              <td><%= item.city.city_name %></td>
+              <td><%= item.city.weather %></td>
+              <td><%= item.item_status %></td>
+              <% if(item.item_status==='active'){ %>
+              <td><a class="btn btn-warning" href="/edit/<%= item.item_id%>">Edit</a>
+              <a class="btn btn-danger" href="/delete/<%= item.item_id%>">Delete</a></td>
+              <% } else if (item.item_status==='inactive'){ %>  
+              <td><form action='/undo/<%= item.item_id %>' method="POST">
       <button type="submit" class="btn btn-dark">Undo</button>
     </form></td>
-              <% } %>
+              <% } else {%>
+                <td></td>
+              <% }%>
             </tr>                                   
          <% }) %>
     </table>
@@ -63,9 +75,9 @@
         </tr>
         <% comments.forEach((comment) => {%>
         <tr>  
-          <td><%= comment.id %></td>
-          <td><%= comment.itemid %></td>
-          <td><%= comment.comment %></td>
+          <td><%= comment.comment_id %></td>
+          <td><%= comment.item_id %></td>
+          <td><%= comment.comment_text %></td>
         </tr>                                   
         <% }) %>
     </table>

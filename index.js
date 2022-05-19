@@ -1,4 +1,5 @@
 const express = require('express');
+require('dotenv').config();
 
 const app = express();
 app.set('view engine', 'ejs');
@@ -21,14 +22,14 @@ app.use('/', editRoute);
 app.use('/', deleteRoute);
 app.use('/', undoRoute);
 
-app.get('/error', function(req, res) {
+app.get('/error', function (req, res) {
   res.render('error.ejs');
 });
 
-app.get('*', function(req, res) {
+app.get('*', function (req, res) {
   res.render('notfound.ejs');
 });
 
-app.listen(3000, function() {
+app.listen(3000, function () {
   console.log('App server is running on port 3000');
 });
